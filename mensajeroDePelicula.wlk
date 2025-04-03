@@ -14,7 +14,7 @@ object paquete {
 // DESTINOS
 
 object puenteDeBrooklyn {
-
+	
 	method puedePasar(mensajero, paquete) {
 		return mensajero.peso() <= 1000	&& paquete.estaPago()
 	}
@@ -36,7 +36,7 @@ object chuckNorris {
 
 	method peso() {
 		return peso
-  }
+  	}
 
 	method puedeLlamar() {
 		return true
@@ -78,6 +78,8 @@ object lincolnHawk {
 		return peso + vehiculos.last().peso()
 	}
 }
+
+// VEHICULOS
 
 object bicicleta {
 	method peso(){
