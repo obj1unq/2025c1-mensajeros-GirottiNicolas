@@ -9,6 +9,10 @@ object paquete {
 	  estaPago = true
 	}
 
+	method cancelarPago(){ 
+		estaPago = false
+	}
+
 }
 
 // DESTINOS
@@ -45,21 +49,30 @@ object chuckNorris {
 
 object neo {
 
-	var credito = [true,false]
+	var credito = false
 
 	method peso() {
 	  return 0
 	}
 
+	method agotarCredito(){
+		credito = false
+	}
+
+	method cargarCredito(){
+		credito = true
+	}
+
 	method puedeLlamar() {
-		return credito.randomized().first()
+		return credito
 	}
 }
 
 object lincolnHawk {
 	var peso = 0
 
-	var vehiculos = [bicicleta,camion]
+	// Asumo que va a utilizar una bicicleta por defecto (consultar)
+	var vehiculo = bicicleta
 
 	method peso(_peso) {
 	  peso = _peso 
@@ -69,13 +82,12 @@ object lincolnHawk {
 		return false
 	}
 
-	method usar(vehiculo){ 
-		vehiculos.add(vehiculo)
-		vehiculos.remove(vehiculos.first())
+	method vehiculo(_vehiculo){ 
+		vehiculo = _vehiculo
 	}
 
 	method peso(){
-		return peso + vehiculos.last().peso()
+		return peso + vehiculo.peso()
 	}
 }
 
@@ -88,17 +100,26 @@ object bicicleta {
 }
 
 object camion {
-	var peso = 500
+	const pesoBase = 500
+	var cantidadAcoplados = 0
 
+	method pesoAcoplado(){
+		return 500 * cantidadAcoplados
+	}
 	method peso() {
-		return peso
+		return pesoBase * self.pesoAcoplado() 
 	}
 
 	method tieneAcoplado(){
-		return peso > 500
+		return self.peso() > 500
 	}
 
 	method agregarAcoplado() {
-		peso += 500
+		cantidadAcoplados += 1
 	}
+
+	method quitarAcoplado() {
+	  cantidadAcoplados -= if (cantidadAcoplados > 0) { 1 } else { 0 }
+	}
+
 }
